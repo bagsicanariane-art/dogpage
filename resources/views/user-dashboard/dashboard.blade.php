@@ -6,10 +6,9 @@
 <div class="main-content">
     
     <div class="navbar-custom">
-        <h5>Welcome, User!</h5>
+        <h5>Welcome, {{ auth()->user()->name }}!</h5>
         <div>
-            <a href="#"><i class="bi bi-bell"></i></a>
-            <a href="#"><i class="bi bi-person-circle"></i></a>
+            <h6><i class="bi bi-person-circle mx-3"></i>{{ auth()->user()->name }}</h6>
         </div>
     </div>
 

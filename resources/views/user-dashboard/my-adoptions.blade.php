@@ -2,36 +2,31 @@
 
 <body>
     @include('user-dashboard.sidebar')
-    <div class="main-content">
-        
-        <div class="page-header">
+    <div class="main-content p-4">
+
+        <div class="page-header mb-4">
             <h2><i class="bi bi-heart-fill"></i> My Adoptions</h2>
-            <p class="text-light opacity-75">Here are all the dogs you have adopted so far. You can also track their progress and details.</p>
+            <p class="text-light opacity-75">All the dogs you have adopted and their statuses.</p>
         </div>
+
+        @if(session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
 
         <!-- Dog Cards -->
         <div class="row g-4 mb-4">
+            @forelse($adoptions as $adopt)
             <div class="col-md-4">
                 <div class="card-glass dog-card">
-                    <img src="https://images.unsplash.com/photo-1558788353-f76d92427f16?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8ZG9nfHx8fHx8MTY4NzkyODI1OA&ixlib=rb-4.0.3&q=80&w=400" alt="Buddy">
-                    <h5 class="mt-3">Buddy</h5>
-                    <p>Labrador - Adopted: 2026-03-10</p>
+                    <img src="{{ asset('img/' . strtolower($adopt->dog_name) . '.jpg') }}" alt="{{ $adopt->dog_name }}">
+                    <h5 class="mt-3">{{ $adopt->dog_name }}</h5>
+                    <p>Adopted on: {{ $adopt->created_at->format('Y-m-d') }}</p>
+                    <span class="badge bg-warning">{{ $adopt->status }}</span>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card-glass dog-card">
-                    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400" alt="Charlie">
-                    <h5 class="mt-3">Charlie</h5>
-                    <p>Beagle - Adopted: 2026-03-11</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card-glass dog-card">
-                    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400" alt="Charlie">
-                    <h5 class="mt-3">Charlie</h5>
-                    <p>Beagle - Adopted: 2026-03-11</p>
-                </div>
-            </div>
+            @empty
+            <p class="text-light">You have not adopted any dogs yet.</p>
+            @endforelse
         </div>
 
         <!-- Recent Adoptions Table -->
@@ -41,17 +36,28 @@
                 <thead>
                     <tr>
                         <th>Dog Name</th>
-                        <th>Breed</th>
+                        <th>Reason</th>
                         <th>Status</th>
                         <th>Date Adopted</th>
                     </tr>
                 </thead>
                 <tbody>
-                    
+                    @forelse($adoptions as $adopt)
+                        <tr>
+                            <td>{{ $adopt->dog_name }}</td>
+                            <td>{{ $adopt->reason }}</td>
+                            <td>{{ $adopt->status }}</td>
+                            <td>{{ $adopt->created_at->format('Y-m-d') }}</td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="4" class="text-center">No adoptions yet.</td>
+                        </tr>
+                    @endforelse
+                </tbody>
             </table>
         </div>
+
     </div>
-
 </body>
-
 </html>

@@ -6,5 +6,10 @@
     <a href="{{ route('dogadoptions') }}"><i class="bi bi-paw"></i> Dog Adoptions</a>
     <a href="{{ route('community') }}"><i class="bi bi-people"></i> Community</a>
     <a href="#"><i class="bi bi-gear"></i> Settings</a>
-    <a href="#"><i class="bi bi-box-arrow-right"></i> Logout</a>
+ <form action="{{ route('logout') }}" method="POST" style="display:inline;">
+    @csrf
+    <button type="submit" style="background:none; border:none; color:inherit;">
+        <i class="bi bi-box-arrow-right"></i> Logout
+    </button>
+</form>
 </div>

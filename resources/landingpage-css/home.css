@@ -25,6 +25,7 @@
  .nav-link {
      color: var(--light-text) !important;
      font-weight: 600;
+     padding: 10px 20px;
  }
 
  .nav-link:hover {
@@ -39,7 +40,6 @@
      transition: transform 0.4s ease, box-shadow 0.4s ease;
  }
 
- /* Float Animation */
  @keyframes float {
 
      0%,
@@ -82,7 +82,6 @@
      transform: scale(1.05);
  }
 
- /* Hero Image */
  .hero-img {
      border-radius: 30px;
      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
@@ -186,3 +185,5 @@
  footer ul li {
      margin-bottom: 8px;
  }
+
+ 
